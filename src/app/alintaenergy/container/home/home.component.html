@@ -1,0 +1,102 @@
+
+<section class="home">
+<header class="_homepage-banner">
+  <app-banner></app-banner>
+</header>
+<section class="_registration-form container">
+
+  <form #registerForm="ngForm" (ngSubmit)="submitUserDetails()">
+  
+    <!--Name of the user-->
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Name" #name="ngModel" [class.invalid]="name.invalid && name.touched"
+          [class.valid]="name.valid && name.touched" type="text" name="name"
+          [(ngModel)]="formDetails.customerName" pattern="[a-zA-Z ]*" required/>
+        </mat-form-field>
+        <div *ngIf="!name.valid && name.touched" class="form-error">
+          Name is required and must contain only alphabets!
+        </div>
+        
+      </div>
+      <div class="col-12 col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Annual spend" #annualSpend="ngModel" [class.invalid]="annualSpend.invalid && annualSpend.touched"
+          [class.valid]="annualSpend.valid && annualSpend.touched" type="number" name="annualSpend"
+          [(ngModel)]="formDetails.customerAnnualSpend" required/>
+        </mat-form-field>
+        <div *ngIf="!annualSpend.valid && annualSpend.touched" class="form-error">
+          Annual Spend is required!
+        </div>
+      
+      </div>
+    </div>
+   
+  
+    <!--Address of the user-->
+   <div class="row">
+     <div class="col-12 col-md-6">
+      <mat-form-field>
+        <input matInput placeholder="Address" #address="ngModel" [class.invalid]="address.invalid && address.touched"
+        [class.valid]="address.valid && address.touched" type="text" name="address"
+        [(ngModel)]="formDetails.customerAddress" required/>
+      </mat-form-field>
+      <div *ngIf="!address.valid && address.touched" class="form-error">
+        Address is required!
+      </div>
+     </div>
+     <div class="col-12 col-md-6">
+      <!--Select state-->
+      <mat-form-field>
+        <mat-select placeholder="Select state" (selectionChange)=selectedState($event)>
+          <mat-option *ngFor="let state of states" [value]="state">
+            {{state}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="selectedStateError" class="form-error">
+        State is required!
+      </div>
+       </div>
+   </div>
+  
+
+  
+    <!--select power or gas-->
+    <div class="row product-selection">
+      <div class="col-12 col-md-4">
+        <label>Please select a product type</label>
+      </div>
+      <div class="col-12 col-md-8">
+        <mat-button-toggle-group>
+          <mat-button-toggle *ngFor="let selectionOption of selectionOptions" [value]="selectionOption" (change)="selectedProduct($event)">{{selectionOption}}</mat-button-toggle>
+          
+        </mat-button-toggle-group>
+        <div *ngIf="selectedProductError" class="form-error">
+          Product selection is required!
+        </div>
+      </div>
+    </div>
+
+   
+    <!--Annual spend of the user-->
+    <div class="row">
+   
+    </div>
+   <div class="row">
+     <div class="col-12 __buttons">
+      <button class="btn btn-primary" type="submit" [disabled]="!registerForm.form.valid">
+        Submit
+      </button>
+    
+      <button class="btn btn-info" type="button" (click)="registerForm.reset()">
+        Reset
+      </button>
+     </div>
+   </div>
+  
+  
+  </form>
+</section>
+</section>
