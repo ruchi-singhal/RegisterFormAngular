@@ -11,7 +11,7 @@
         padding:25px;
 
         mat-form-field{
-            width:320px;
+            width:100%;
         }
 
         .form-error {
@@ -77,6 +77,12 @@
         padding:0 8%;
         margin-top:80px;
         margin-bottom:80px;
+        form{
+        mat-form-field{
+            width:320px;
+        }
+        }
+
         
      }
 }
